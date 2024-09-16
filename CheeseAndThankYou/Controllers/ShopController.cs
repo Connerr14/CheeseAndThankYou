@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CheeseAndThankYou.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CheeseAndThankYou.Controllers
 {
@@ -30,7 +31,15 @@ namespace CheeseAndThankYou.Controllers
                     return RedirectToAction("Index");
             }
 
-            return View();
+            // Use products model to make in-memory product list
+            var products = new List<Product>();
+
+            for (int i = 1; i < 5; i++)
+            {
+                products.Add(new Product { ProductId = i, Name = ViewData["Category"] + " Cheese " + i});
+            }
+
+            return View(products);
         }
     }
 }
