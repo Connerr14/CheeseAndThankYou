@@ -34,7 +34,7 @@ namespace CheeseAndThankYou.Controllers
             // Use products model to make in-memory product list
             var products = new List<Product>();
 
-            for (int i = 1; i < 5; i++)
+            for (int i = 1; i < 13; i++)
             {
                 products.Add(new Product { ProductId = i, Name = ViewData["Category"] + " Cheese " + i});
             }
