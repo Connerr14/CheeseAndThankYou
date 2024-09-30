@@ -23,5 +23,11 @@ namespace CheeseAndThankYou.Models
         public string? Image { get; set; }
         public string Size { get; set; }
 
+        // Foreign key
+        public int CategorId { get; set; }
+
+        // Parant ref
+        public Category? Category { get; set; }
+
     }
 }
