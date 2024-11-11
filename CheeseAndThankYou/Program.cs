@@ -22,8 +22,18 @@ builder.Services.AddAuthentication()
     {
         options.ClientId = builder.Configuration["Authentication:Google:ClientID"];
         options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+    })
+
+    .AddGitHub(options =>
+    {
+        options.ClientId = builder.Configuration["Authentication:GitHub:ClientID"];
+        options.ClientSecret = builder.Configuration["Authentication:GitHub:ClientSecret"];
     });
-builder.Services.AddAuthentication();
+
+
+
+
+
 
 
 
