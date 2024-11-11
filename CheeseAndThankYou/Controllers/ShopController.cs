@@ -1,43 +1,39 @@
-﻿using CheeseAndThankYou.Models;
+﻿using CheeseAndThankYou.Data;
+using CheeseAndThankYou.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CheeseAndThankYou.Controllers
 {
     public class ShopController : Controller
     {
+        // DB connection for all methods in the controller
+        private readonly ApplicationDbContext _context;
+
+        // Constructor with DB connection dependency (DI - dependency injection) one object needs another object
+        public ShopController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            // Fetch the list of categories
+            var categories = _context.Categories.ToList();
+            // Passing the list to the view
+            return View(categories);
         }
 
         // Get: /Shop/ByCategory
         public IActionResult ByCategory(int id)
         {
-            switch (id)
+            // Make sure we have a valid Category id
+            // Fetch list of products in selected category and pass to view
+            if (id == 0)
             {
-                case 1:
-                    ViewData["Category"] = "English";
-                    break;
-                case 2:
-                    ViewData["Category"] = "Soft";
-                    break;
-                case 3:
-                    ViewData["Category"] = "Hard";
-                    break;
-                case 4:
-                    ViewData["Category"] = "Blue";
-                    break;
-                default:
-                    return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
 
-            // Use products model to make in-memory product list
-            var products = new List<Product>();
-
-            for (int i = 1; i < 13; i++)
-            {
-                products.Add(new Product { ProductId = i, Name = ViewData["Category"] + " Cheese " + i});
-            }
+            var products = _context.Products.Where(p => p.CategorId == id).ToList();
 
             return View(products);
         }

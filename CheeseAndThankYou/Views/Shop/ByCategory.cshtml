@@ -4,12 +4,36 @@
     ViewData["Title"] = "Shop our Cheeses " + ViewData["Category"] + " Cheeses";
 }
 
+@if (Model.Count() == 0)
+{
+    <h1>Sorry, No products found</h1>
+    return;
+}
+
+<h1>@ViewData["Category"]</h1>
+
+<section class="row card-group"> 
+
 <h1>All of these are really good...</h1>
-<ul>
      
        @foreach (var product in Model)
          {
+             <article class="col-lg-4 mb-3">
+                <div class="card mb-4 h-100">
+                 <div class="card-body">
+                    <h4>@product.Name</h4>
+                    <p>@product.Price</p>
+                    <p>@product.Description</p>
+                    <p>@String.Format("{0:c"), product.Price</p>
+                    <p>@product.Size</p>
+                    <a class="btn btn-primary>Buy Now">
+                        Add to Cart
+                    </a>
+                    </div>
+                 </div>
+             </article>
+
             <li>@product.Name</li>
+         }
          } 
-     
-</ul>
+</section>

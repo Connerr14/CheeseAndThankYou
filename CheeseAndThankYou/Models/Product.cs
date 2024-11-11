@@ -17,17 +17,25 @@ namespace CheeseAndThankYou.Models
         public string Description { get; set; }
 
         [Range(0.01, 1000.00)]
+        // Only applies to the html
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal Price { get; set; }
 
         // The image could be string but it also could be null
-        public string? Image { get; set; }
+        public string? Photo { get; set; }
         public string Size { get; set; }
 
         // Foreign key
+        [DisplayName("Category")]
         public int CategorId { get; set; }
 
         // Parant ref
         public Category? Category { get; set; }
+
+        // Child ref
+        public List<CartItem>? CartItems { get; set; }
+
+        public List<OrderDetail>? OrderDetails { get; set; }
 
     }
 }
